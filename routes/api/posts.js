@@ -1,5 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
+const passport = require("passport");
+
+// Load Post model
+const Post = require("../../models/Post");
 
 // @route  GET api/posts/test
 // @desc   Tests posts route
