@@ -231,7 +231,7 @@ router.post(
   }
 );
 
-// @route  DELETE api/profile/experience
+// @route  DELETE api/profile/experience/:exp_id
 // @desc   Delete experience from profile
 // @access Private
 router.delete(

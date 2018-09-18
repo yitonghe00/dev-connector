@@ -88,15 +88,15 @@ router.delete(
   }
 );
 
-// @route  POST api/posts/like/:id
+// @route  POST api/posts/:post_id/like
 // @desc   Like the Post
 // @access Private
 router.post(
-  "/like/:id",
+  "/:post_id/like",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findOne({ _id: req.params.id })
+      Post.findOne({ _id: req.params.post_id })
         .then(post => {
           // Check if the user already liked the post
           if (
@@ -119,15 +119,15 @@ router.post(
   }
 );
 
-// @route  POST api/posts/unlike/:id
+// @route  POST api/posts/:post_id/unlike
 // @desc   Unlike the Post
 // @access Private
 router.post(
-  "/unlike/:id",
+  "/:post_id/unlike",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findOne({ _id: req.params.id })
+      Post.findOne({ _id: req.params.post_id })
         .then(post => {
           // Check if the user already liked the post
           if (
@@ -155,11 +155,11 @@ router.post(
   }
 );
 
-// @route  POST api/posts/comment/:id
+// @route  POST api/posts/:post_id/comment
 // @desc   Add Comment to the Post
 // @access Private
 router.post(
-  "/comment/:id",
+  "/:post_id/comment",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validatePostInput(req.body);
@@ -170,7 +170,7 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Post.findOne({ _id: req.params.id })
+    Post.findOne({ _id: req.params.post_id })
       .then(post => {
         const newComment = {
           text: req.body.text,
@@ -194,14 +194,14 @@ router.post(
   }
 );
 
-// @route  DELETE api/posts/comment/:id/:comment_id
+// @route  DELETE api/posts/:post_id/comment/:comment_id
 // @desc   Remove Comment from the Post
 // @access Private
 router.delete(
-  "/comment/:id/:comment_id",
+  "/:post_id/comment/:comment_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Post.findOne({ _id: req.params.id })
+    Post.findOne({ _id: req.params.post_id })
       .then(post => {
         // Check to see if the comment exists
         if (
