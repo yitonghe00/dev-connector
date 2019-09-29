@@ -17,7 +17,7 @@ class ProfileGithub extends Component {
     const { count, sort } = this.state;
 
     fetch(
-      `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${updated}&` +
+      `https://api.github.com/users/${username}/repos?per_page=${count}&sort=updated&` +
         keys.githubKey
     )
       .then(res => res.json())
